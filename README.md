@@ -97,6 +97,7 @@ KOK은 기업의 단기 공백(휴가, 연차, 출장 등)으로 생긴 빈자�
 -   공지사항 작성
 
 #### ✅ 진척도
+<img width="412" height="248" alt="화면진척도" src="https://github.com/user-attachments/assets/efce781b-2398-4392-aed5-ecf284221545" />
 
 <br>
 
@@ -194,5 +195,8 @@ KOK은 기업의 단기 공백(휴가, 연차, 출장 등)으로 생긴 빈자�
 -   기업별 체험/인턴 공고 검색
 
 #### ✅ 진척도
+<img width="782" height="171" alt="서버진척도" src="https://github.com/user-attachments/assets/3e68375a-65b7-4a5f-a19d-bfa45e57c3ef" />
+
+<br>
 
 ## ✨ 프로젝트 진행 중 오류
