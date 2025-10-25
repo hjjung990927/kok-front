@@ -29,7 +29,7 @@ KOK은 기업의 단기 공백(휴가, 연차, 출장 등)으로 생긴 빈자�
 2. 인턴공고: 짧은 체험 경험이 채용으로 자연스럽게 이어지는 기회의 흐름을 제공합니다.
 3. 커뮤니티: 경험을 공유하고 연결하며 새로운 기회와 배움을 만들어가는 장을 제공합니다.
 
-## 🔧 개발 환경
+## 🛠️ 개발 환경
 
 -   HTML, CSS, JS
 -   Java
@@ -96,7 +96,7 @@ KOK은 기업의 단기 공백(휴가, 연차, 출장 등)으로 생긴 빈자�
 -   공지사항 목록 및 상세
 -   공지사항 작성
 
-#### ✅ 진척도
+#### 🎯 진척도
 <img width="412" height="248" alt="화면진척도" src="https://github.com/user-attachments/assets/efce781b-2398-4392-aed5-ecf284221545" />
 
 <br>
@@ -120,8 +120,6 @@ KOK은 기업의 단기 공백(휴가, 연차, 출장 등)으로 생긴 빈자�
 -   게시글 목록
 -   게시글 작성
 
-<br>
-
 #### 🔍 커뮤니티 페이지: 게시글 상세
 
 ▶ REST 기반 비동기 상세 조회
@@ -140,8 +138,6 @@ KOK은 기업의 단기 공백(휴가, 연차, 출장 등)으로 생긴 빈자�
 -   댓글/대댓글 목록
 -   댓글/대댓글 작성/수정/삭제
 
-<br>
-
 #### 🔍 커뮤니티 페이지: 게시글 작성/수정/삭제
 
 ▶ AWS S3 파일 업로드/삭제 처리
@@ -154,11 +150,9 @@ KOK은 기업의 단기 공백(휴가, 연차, 출장 등)으로 생긴 빈자�
 -   게시글 수정
 -   게시글 삭제
 
-<br>
-
 #### 🔍 기업 페이지: 기업 목록
 
-▶ Criteria 기반 페이징 처리 및 기업 목록 조회
+▶ Criteria 기반의 무한 스크롤 페이징 구현
 
 ▶ 기업명, 키워드, 조건을 활용한 기업 검색 기능 제공
 
@@ -172,8 +166,6 @@ KOK은 기업의 단기 공백(휴가, 연차, 출장 등)으로 생긴 빈자�
 
 -   기업 목록
 -   기업 검색
-
-<br>
 
 #### 🔍 기업 페이지: 기업 상세
 
@@ -194,9 +186,30 @@ KOK은 기업의 단기 공백(휴가, 연차, 출장 등)으로 생긴 빈자�
 -   기업별 체험/인턴 공고 목록
 -   기업별 체험/인턴 공고 검색
 
-#### ✅ 진척도
+#### 🎯 진척도
 <img width="782" height="171" alt="서버진척도" src="https://github.com/user-attachments/assets/3e68375a-65b7-4a5f-a19d-bfa45e57c3ef" />
 
 <br>
 
-## ✨ 프로젝트 진행 중 오류
+## 🚨 프로젝트 진행 중 오류
+#### 📢 오류 원인: AWS S3 Presigner 호출 시 key 값이 null
+<img width="1168" height="314" alt="S3에서 불러오기 실패" src="https://github.com/user-attachments/assets/9364afef-021d-41da-ad8c-effcb76f3a00" />
+
+#### ✅ 해결 방법
+<img width="616" height="572" alt="image" src="https://github.com/user-attachments/assets/ece1b3b8-2ee2-466b-a854-11dfd97fed58" />
+<br>
+파일 업로드 과정에서 PostFileDTO에는 값이 들어가고 있었으나, FileDTO에는 데이터가 저장되지 않아 S3 Key가 null로 반환되는 문제가 발생했습니다. <br>
+이를 해결하기 위해 파일 업로드 로직에 FileDTO 저장 처리를 추가하고 이후 PostFileDTO와 매핑하도록 수정하여 조회 시 정상적으로 Presigned URL을 생성할 수 있도록 개선했습니다.
+
+#### 📢 오류 원인: 게시글 상세  좋아요 수와 게시글 목록 좋아요 수 불일치
+<img width="2561" height="1398" alt="localhost_10000_community_page" src="https://github.com/user-attachments/assets/0b1fdfa1-4634-4db7-8b36-3f74e95a8037" />
+<img width="2561" height="1398" alt="localhost_10000_community_page (1)" src="https://github.com/user-attachments/assets/43dd2a92-3b13-48eb-9936-1555bd888fa6" />
+
+
+#### ✅ 해결 방법
+<img width="445" height="238" alt="image" src="https://github.com/user-attachments/assets/2497a4f0-f618-4bef-8dc1-2600d241186a" />
+<br>
+`@Cacheable` 을 사용해 상세 조회 데이터를 캐싱하여 조회 성능을 개선했으나, 
+좋아요/좋아요 취소 기능에는 캐시 무효화 처리가 없어 데이터 불일치 문제가 발생했습니다.  
+이를 해결하기 위해, 좋아요 변경 시 캐시를 삭제하도록 
+`@CacheEvict(value = "posts", key = "'post_' + #postId")` 를 적용하여 문제를 해결했습니다.
