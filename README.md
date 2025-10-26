@@ -203,8 +203,9 @@ KOK은 기업의 단기 공백(휴가, 연차, 출장 등)으로 생긴 빈자�
 #### ✅ 해결 방법
 <img width="616" height="572" alt="image" src="https://github.com/user-attachments/assets/ece1b3b8-2ee2-466b-a854-11dfd97fed58" />
 <br>
-파일 업로드 과정에서 PostFileDTO에는 값이 들어가고 있었으나, FileDTO에는 데이터가 저장되지 않아 S3 Key가 null로 반환되는 문제가 발생했습니다. <br>
-이를 해결하기 위해 파일 업로드 로직에 FileDTO 저장 처리를 추가하고 이후 PostFileDTO와 매핑하도록 수정하여 조회 시 정상적으로 Presigned URL을 생성할 수 있도록 개선했습니다.
+
+파일 업로드 과정에서 PostFileDTO에는 값이 들어가고 있었으나, **FileDTO에는 데이터가 저장되지 않아 S3 Key가 null로 반환**되는 문제가 발생했습니다. <br>
+이를 해결하기 위해 파일 업로드 로직에 **FileDTO 저장 처리를 추가**하고 이후 **PostFileDTO와 매핑**하도록 수정하여 조회 시 정상적으로 `Presigned URL` 을 생성할 수 있도록 개선했습니다.
 
 #### 📢 오류 원인: 게시글 상세  좋아요 수와 게시글 목록 좋아요 수 불일치
 <img width="2561" height="1398" alt="localhost_10000_community_page" src="https://github.com/user-attachments/assets/0b1fdfa1-4634-4db7-8b36-3f74e95a8037" />
@@ -215,7 +216,8 @@ KOK은 기업의 단기 공백(휴가, 연차, 출장 등)으로 생긴 빈자�
 <img width="445" height="238" alt="image" src="https://github.com/user-attachments/assets/2497a4f0-f618-4bef-8dc1-2600d241186a" />
 <br>
 
-`(@Cacheable)`로 상세 조회 데이터를 캐싱하여 조회 성능을 개선했으나 좋아요/좋아요 취소 기능에는 캐시 무효화 처리가 없었습니다. <br> 이를 해결하기 위해 좋아요 변경 시 캐시 삭제하도록 `(@CacheEvict)`를 적용해 해결했습니다.
+`(@Cacheable)`로 상세 조회 데이터를 캐싱하여 조회 성능을 개선했으나 좋아요/좋아요 취소 기능에는 **캐시 무효화 처리가 없었습니다**. <br> 
+이를 해결하기 위해 좋아요 변경 시 **캐시 삭제하도록 `(@CacheEvict)`를 적용**해 해결했습니다.
 
 ## ✍️ 총평
 #### ⏳ 어려웠던 부분
